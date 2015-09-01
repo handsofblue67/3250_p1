@@ -66,6 +66,7 @@ public class BMI
 					height = sc.nextDouble();
 
 					double bmi = calc(weight, height);
+					bmi = Math.round(100 * bmi) / 100d;
 					System.out.println("Your BMI is:" + bmi + ", " + CATAGORIES[catagorize(bmi)]);
 				}
 			}
