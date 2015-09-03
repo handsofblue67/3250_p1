@@ -9,73 +9,58 @@ public class BMI
 
 	public static void main(String[] args)
 	{
-		boolean keepRunning = true;
-		
 		Scanner sc = new Scanner(System.in);
-
 		double height = 0;
 		double weight = 0;
 		String input = "";
-
-		while (keepRunning == true)
+		
+quit:
+		while (true)
 		{
 			
-			System.out.print("How much do you weight (in pounds)? ");
+			System.out.print("How much do you weight (in pounds)?  ");
 
-			while (sc.hasNextDouble() == false)
+			while (!sc.hasNextDouble())
 			{
 				input = sc.next();
 		
 				if(input.equals("quit"))
 				{
-					keepRunning = false;
-					break;
+					break quit;
 				}
+					
+				System.out.print("\nError: That input in invalid\n\nHow much do you weight (in pounds)? ");
+			}
 			
+			weight = sc.nextDouble();
+
+			System.out.print("\nHow tall are you? (in feet)? ");
+
+			while(!sc.hasNextDouble())
+			{
+				input = sc.next();
+
+				if(input.equals("quit"))
+				{
+					break quit;
+				}
+
 				else
 				{
-					System.out.print("Error: That input in invalid\n\nHow much do you weight (in pounds)? ");
+					System.out.print("\nError: That input in invalid\n\nHow tall are you? (in feet)? ");
 				}
+
 			}
-			
-			if (keepRunning == true)
-			{
-				weight = sc.nextDouble();
+		
+			height = sc.nextDouble();
 
-				System.out.print("How tall are you? (in feet)? ");
-
-				while(sc.hasNextDouble() == false)
-				{
-					input = sc.next();
-
-					if(input.equals("quit"))
-					{
-						keepRunning = false;
-						break;
-					}
-
-					else
-					{
-						System.out.print("Error: That input in invalid\n\nHow tall are you? (in feet)? ");
-					}
-
-				}
-			
-				if (keepRunning == true)
-				{
-					height = sc.nextDouble();
-
-					double bmi = calc(weight, height);
-					bmi = Math.round(100 * bmi) / 100d;
-					System.out.println("Your BMI is:" + bmi + ", " + CATAGORIES[catagorize(bmi)]);
-				}
-			}
+			double bmi = calc(weight, height);
+			bmi = Math.round(100 * bmi) / 100d;
+			System.out.println("\nYour BMI is:" + bmi + ", " + CATAGORIES[catagorize(bmi)] + "\n");
+		}
 			
 
-		}	
-
-	
-	}
+	}	
 
 	public static double feetToInches(double _feet)
 	{
@@ -90,15 +75,11 @@ public class BMI
 
 	public static int catagorize(double _bmi)
 	{
-		int i;
-		for (i = 0; i < RANGE.length; ++i)
+		int i = 0;
+		while(RANGE[i] <= _bmi && i < (RANGE.length - 1))
 		{
-			if (_bmi <= RANGE[i])
-			{
-				break;
-			}
+			i++;
 		}
-
 		return i;
 	}
 }
