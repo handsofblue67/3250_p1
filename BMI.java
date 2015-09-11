@@ -69,18 +69,30 @@ quit: //if user inputs "quit" at anytime, break here
 			
 
 	}	
-
+	
+	//feetToInches
+	//converts feet to inches
+	//takes a double
+	//returns a double
 	public static double feetToInches(double _feet)
 	{
 		return _feet * TWELVE;
 	}
-
+	
+	//calc
+	//calculates BMI
+	//two doubles (height and weight
+	//returns a double
 	public static double calc(double _weight, double _height)
 	{
 		double inchHeight = feetToInches(_height);
 		return (_weight * BMI_CONST) / (inchHeight * inchHeight);
 	}
-
+	
+	//catagorize
+	//cycles through array to find the suitable category
+	//takes a double
+	//return an int (the index of the category)
 	public static int catagorize(double _bmi)
 	{
 		int i = 0;
